@@ -4,7 +4,7 @@ from .environment import SHOW_COMMIT, VERSION
 
 
 def get_version() -> str:
-    """returns the current version "`v.<num>.<num>.<num>-<last_commit>`" """
+    """returns the current version "`v.<major>.<minor>.<patch>-<last_commit>`" """
     if SHOW_COMMIT:
         return f"v.{VERSION}-{getoutput('git describe --tags --always')}"
     else:
