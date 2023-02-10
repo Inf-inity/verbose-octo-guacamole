@@ -6,6 +6,6 @@ from .environment import SHOW_COMMIT, VERSION
 def get_version() -> str:
     """returns the current version "`v.<major>.<minor>.<patch>-<last_commit>`" """
     if SHOW_COMMIT:
-        return f"v.{VERSION}-{getoutput('git describe --tags --always')}"
+        return f"v.{VERSION}-{getoutput('git describe --tags --always')}@{getoutput('git branch --show-current')}"
     else:
         return f"v.{VERSION}"
