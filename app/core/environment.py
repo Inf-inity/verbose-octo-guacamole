@@ -24,7 +24,7 @@ APP_CONTACT: dict[str, str] | None = {
     "Contact": str(get_optional("APP_CONTACT", None))
 } if get_optional("APP_CONTACT", None) is not None else None
 APP_HOST: str = getenv("APP_HOST", "0.0.0.0")
-APP_PORT: int = int(getenv("APP_PORT", "6747"))
+APP_PORT: int = int(getenv("APP_PORT", 8000))
 APP_NAME: str = getenv("APP_NAME", "FastAPI")
 APP_RELOAD: bool = get_bool("APP_RELOAD", False)
 APP_DEBUG: bool = get_bool("APP_DEBUG", False)
@@ -33,3 +33,14 @@ APP_REDOC_URL: str | None = get_optional("APP_REDOC_URL", "/redocs")
 
 APP_ADMIN_USERNAME: str = getenv("APP_ADMIN_USERNAME", "admin")
 APP_ADMIN_PASSWORD: str = getenv("APP_ADMIN_PASSWORD", "password")
+
+DB_DRIVER: str = getenv("DB_DRIVER", "postgresql+asyncpg")
+POSTGRES_HOST: str = getenv("POSTGRES_HOST", "main_db")
+POSTGRES_PORT: int = int(getenv("POSTGRES_PORT", 5432))
+POSTGRES_USER: str = getenv("POSTGRES_USER", "admin")
+POSTGRES_PASSWORD: str = getenv("POSTGRES_PASSWORD", "password")
+POSTGRES_DB: str = getenv("POSTGRES_DB", "db")
+
+REDIS_HOST: str = getenv("REDIS_HOST", "redis")
+REDIS_PORT: int = int(getenv("REDIS_PORT", 6379))
+REDIS_CACHE_TTL: int = int(getenv("REDIS_CACHE_TTL", 300))
