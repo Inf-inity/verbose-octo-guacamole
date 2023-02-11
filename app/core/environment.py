@@ -30,6 +30,7 @@ APP_RELOAD: bool = get_bool("APP_RELOAD", False)
 APP_DEBUG: bool = get_bool("APP_DEBUG", False)
 APP_DOCS_URL: str | None = get_optional("APP_DOCS_URL", "/docs")
 APP_REDOC_URL: str | None = get_optional("APP_REDOC_URL", "/redocs")
+APP_ALLOW_REGISTRATION: bool = get_bool("APP_ALLOW_REGISTRATION", False)
 
 APP_ADMIN_USERNAME: str = getenv("APP_ADMIN_USERNAME", "admin")
 APP_ADMIN_PASSWORD: str = getenv("APP_ADMIN_PASSWORD", "password")

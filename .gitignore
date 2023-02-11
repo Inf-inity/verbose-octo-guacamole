@@ -134,3 +134,5 @@ dmypy.json
 # data
 .data/
 ./data/
+data/
+/data/
