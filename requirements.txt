@@ -2,5 +2,6 @@ fastapi
 passlib[bcrypt]
 pydantic
 python-jose[cryptography]
+redis[hiredis]
 sqlalchemy
 uvicorn
