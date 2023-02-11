@@ -7,6 +7,7 @@ from sqlalchemy import BigInteger, Boolean, Column, DateTime, String
 from sqlalchemy.orm import Mapped
 
 from core.environment import APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD
+from core.security import hash_password
 from database import Base, db, select
 
 
@@ -24,7 +25,7 @@ class User(Base):
     @staticmethod
     async def create(name: str, password: str | None = None, enabled: bool = True, admin: bool = False) -> User:
         user = User(
-            name=name, password=password, registration=datetime.utcnow(), enabled=enabled, admin=admin
+            name=name, password=hash_password(password), registration=datetime.utcnow(), enabled=enabled, admin=admin
         )
         await db.add(user)
         return user
@@ -34,7 +35,7 @@ class User(Base):
         if await db.exists(select(User)):
             return
 
-        user = await User.create(name=APP_ADMIN_USERNAME, password=APP_ADMIN_PASSWORD, enabled=True, admin=True)
+        user = await User.create(name=APP_ADMIN_USERNAME, password=hash_password(APP_ADMIN_PASSWORD), enabled=True, admin=True)
         return user
 
     async def remove(self):
