@@ -7,7 +7,7 @@ from sqlalchemy import BigInteger, Boolean, Column, DateTime, String
 from sqlalchemy.orm import Mapped
 
 from core.environment import APP_ADMIN_USERNAME, APP_ADMIN_PASSWORD
-from core.security import hash_password
+from core.security import hash_password, hash_token
 from database import Base, db, select
 
 
@@ -35,7 +35,7 @@ class User(Base):
         if await db.exists(select(User)):
             return
 
-        user = await User.create(name=APP_ADMIN_USERNAME, password=hash_password(APP_ADMIN_PASSWORD), enabled=True, admin=True)
+        user = await User.create(name=APP_ADMIN_USERNAME, password=APP_ADMIN_PASSWORD, enabled=True, admin=True)
         return user
 
     async def remove(self):
@@ -50,3 +50,12 @@ class User(Base):
             "enabled": self.enabled,
             "admin": self.admin,
         }
+
+    @staticmethod
+    async def get_user_by(name: str = None, token: str = None) -> User | None:
+        if name:
+            return await db.get(User, name=name)
+        elif token:
+            return await db.get(User, token=hash_token(token))
+        else:
+            return None
